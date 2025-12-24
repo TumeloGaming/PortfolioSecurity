@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
   <title>TumeloGaming - Admin Panel</title>
   <!-- Netlify Identity Widget for Git Gateway authentication -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -15,6 +16,12 @@
 
     body {
       background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+      min-height: 100vh;
+    }
+
+    /* Custom styling for Decap CMS to match site theme */
+    [data-slate-editor] {
+      -webkit-user-modify: read-write !important;
     }
   </style>
 </head>
