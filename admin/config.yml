@@ -1,0 +1,122 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "portfolio"
+    label: "Portfolio Content"
+    files:
+      - label: "Main Page"
+        name: "main"
+        file: "content/portfolio.json"
+        fields:
+          - label: "Page Title"
+            name: "title"
+            widget: "string"
+            default: "TUMELO GAMING"
+          
+          - label: "Introduction"
+            name: "intro"
+            widget: "object"
+            fields:
+              - {label: "Greeting", name: "greeting", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Pronouns", name: "pronouns", widget: "string"}
+              - label: "Skills"
+                name: "skills"
+                widget: "list"
+              - {label: "Personal Note", name: "personal_note", widget: "string"}
+          
+          - label: "Featured Links"
+            name: "featured_links"
+            widget: "list"
+            fields:
+              - {label: "Button Text", name: "text", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+              - {label: "Style", name: "style", widget: "select", options: ["primary", "secondary"]}
+          
+          - label: "Staff Positions"
+            name: "staff_positions"
+            widget: "list"
+            fields:
+              - {label: "Position Title", name: "title", widget: "string"}
+              - {label: "Organization", name: "organization", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Link", name: "link", widget: "string"}
+              - {label: "Link Text", name: "link_text", widget: "string"}
+          
+          - label: "Online Occupation"
+            name: "occupation"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Link", name: "link", widget: "string"}
+              - {label: "Link Text", name: "link_text", widget: "string"}
+          
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - {label: "Project Name", name: "name", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Link", name: "link", widget: "string"}
+              - {label: "Link Text", name: "link_text", widget: "string"}
+          
+          - label: "Server Experience"
+            name: "server_experience"
+            widget: "list"
+            fields:
+              - {label: "Server Name", name: "server", widget: "string"}
+              - {label: "Position", name: "position", widget: "string"}
+          
+          - label: "Social Media"
+            name: "social_media"
+            widget: "object"
+            fields:
+              - {label: "Twitter/X URL", name: "twitter", widget: "string"}
+              - {label: "TikTok URL", name: "tiktok", widget: "string"}
+              - {label: "Instagram URL", name: "instagram", widget: "string"}
+              - {label: "Email", name: "email", widget: "string"}
+              - {label: "Discord URL", name: "discord", widget: "string"}
+          
+          - label: "Footer Text"
+            name: "footer"
+            widget: "string"
+  
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Theme Settings"
+        name: "theme"
+        file: "content/theme.json"
+        fields:
+          - label: "Color Scheme"
+            name: "colors"
+            widget: "object"
+            fields:
+              - {label: "Primary Color (Cyan)", name: "primary", widget: "color"}
+              - {label: "Secondary Color (Pink)", name: "secondary", widget: "color"}
+              - {label: "Accent Color (Orange)", name: "accent", widget: "color"}
+              - {label: "Background Dark", name: "bg_dark", widget: "color"}
+              - {label: "Background Blue", name: "bg_blue", widget: "color"}
+          
+          - label: "Background Effects"
+            name: "effects"
+            widget: "object"
+            fields:
+              - {label: "Particle Count", name: "particle_count", widget: "number", value_type: "int", min: 50, max: 300}
+              - {label: "Connection Distance", name: "connection_distance", widget: "number", value_type: "int", min: 50, max: 200}
+              - {label: "Mouse Radius", name: "mouse_radius", widget: "number", value_type: "int", min: 100, max: 250}
+          
+          - label: "SEO"
+            name: "seo"
+            widget: "object"
+            fields:
+              - {label: "Site Title", name: "title", widget: "string"}
+              - {label: "Meta Description", name: "description", widget: "text"}
