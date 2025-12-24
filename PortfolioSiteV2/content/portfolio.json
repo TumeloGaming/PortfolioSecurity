@@ -1,0 +1,114 @@
+{
+  "title": "TUMELO GAMING",
+  "intro": {
+    "greeting": "Hi there I'm Tumelo",
+    "description": "A gamer that loves playing minecraft, gta5, fortnite, codm and genshin impact and streams on twitch",
+    "pronouns": "he/him",
+    "skills": [
+      "Mc Mod developer",
+      "Mc Skript plugin developer",
+      "Discord Bot developer"
+    ],
+    "personal_note": "Have a loving Girlfriend"
+  },
+  "featured_links": [
+    {
+      "text": "TikTok",
+      "url": "https://tiktok.com/@tumelogaming",
+      "style": "primary"
+    },
+    {
+      "text": "Twitch",
+      "url": "https://twitch.tv/Yaboistreem",
+      "style": "secondary"
+    }
+  ],
+  "staff_positions": [
+    {
+      "title": "Moderator",
+      "organization": "Wrens World",
+      "description": "Youtuber Discord Community",
+      "link": "https://www.youtube.com/@WrensWorldVT",
+      "link_text": "Visit YouTube Channel →"
+    },
+    {
+      "title": "Developer",
+      "organization": "W3eklyMC",
+      "description": "Minecraft Server Development",
+      "link": "https://discord.gg/w3eklymc",
+      "link_text": "Join Discord Server →"
+    }
+  ],
+  "occupation": {
+    "title": "Freelancer on FuzzLabs",
+    "description": "Offering development services and custom solutions",
+    "link": "https://discord.gg/CpZHK5JTYR",
+    "link_text": "Join FuzzLabs Discord →"
+  },
+  "projects": [
+    {
+      "name": "Password Generator",
+      "description": "Need a secure password? Try my online password generator tool",
+      "link": "https://ineedapassword.netlify.app/",
+      "link_text": "Generate Password →"
+    }
+  ],
+  "server_experience": [
+    {
+      "server": "SparkedMC",
+      "position": "SrMod"
+    },
+    {
+      "server": "BakugoMC",
+      "position": "Mod"
+    },
+    {
+      "server": "DarkstroMC",
+      "position": "Mod"
+    },
+    {
+      "server": "PeachMC",
+      "position": "Manager & Net Manager"
+    },
+    {
+      "server": "Minehub",
+      "position": "Manager"
+    },
+    {
+      "server": "MineRush",
+      "position": "SrAdmin"
+    },
+    {
+      "server": "FrostifyMC",
+      "position": "JrMod"
+    },
+    {
+      "server": "FrostMC",
+      "position": "Manager"
+    },
+    {
+      "server": "FrostMC Relaunch",
+      "position": "Executive"
+    },
+    {
+      "server": "DogsHaven",
+      "position": "Builder+Mod"
+    },
+    {
+      "server": "FireSMP",
+      "position": "Manager"
+    },
+    {
+      "server": "MineSwim",
+      "position": "Admin"
+    }
+  ],
+  "social_media": {
+    "twitter": "https://twitter.com/TumeloGaming?t=1QH3wSticF2pCwpRAxXDWw&s=09",
+    "tiktok": "https://www.tiktok.com/@tumelogaming?_t=ZM-8uIF448iRpV&_r=1",
+    "instagram": "https://www.instagram.com/tumelogaming?igsh=MTUwbmhyYXZ0bmNwYQ==",
+    "email": "kgafaneMC@gmail.com",
+    "discord": "https://discordapp.com/users/944246408247136297"
+  },
+  "footer": "MADE WITH PASSION BY TUMELOGAMING"
+}

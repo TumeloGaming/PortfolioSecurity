@@ -1,0 +1,59 @@
+[build]
+  # Build command (not needed for static site, but included for completeness)
+  command = "echo 'Building site...'"
+  # Publish directory - where your site files are
+  publish = "."
+
+# Redirect rules for single-page application behavior
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent site from being embedded in iframes (clickjacking protection)
+    X-Frame-Options = "DENY"
+    # Enable XSS protection
+    X-XSS-Protection = "1; mode=block"
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    # Referrer policy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Content Security Policy (optional, can be customized)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.netlify.com;"
+
+# Special headers for admin panel
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    # Allow admin to be embedded (needed for CMS preview)
+    X-Frame-Options = "SAMEORIGIN"
+
+# Cache control for static assets
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Environment variables (if needed)
+[build.environment]
+  NODE_VERSION = "18"
+
+# Context-specific settings
+[context.production]
+  publish = "."
+
+[context.deploy-preview]
+  publish = "."
+
+[context.branch-deploy]
+  publish = "."

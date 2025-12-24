@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TumeloGaming - Gamer & Developer</title>
+    <meta name="description" content="Tumelo Gaming - Minecraft developer, streamer, and gamer">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+        :root {
+            --space-dark: #0a0e27;
+            --space-blue: #1a1f3a;
+            --nebula-purple: #6b2d8f;
+            --nebula-pink: #d946ef;
+            --star-white: #ffffff;
+            --cyan-glow: #00ffff;
+            --orange-glow: #ff6b35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: radial-gradient(ellipse at bottom, #1a1f3a 0%, #0a0e27 100%);
+            position: relative;
+            color: #ffffff;
+        }
+
+        /* Interactive Constellation Canvas */
+        #constellation-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Nebula clouds */
+        .nebula {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            pointer-events: none;
+            animation: nebulaPulse 10s infinite alternate;
+            z-index: 2;
+        }
+
+        .nebula-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #d946ef, transparent);
+            top: -100px;
+            right: -100px;
+        }
+
+        .nebula-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #6b2d8f, transparent);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -5s;
+        }
+
+        .nebula-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #00ffff, transparent);
+            top: 40%;
+            right: 20%;
+            animation-delay: -7s;
+        }
+
+        @keyframes nebulaPulse {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.2; }
+            100% { transform: scale(1.3) rotate(10deg); opacity: 0.35; }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-particle 20s infinite ease-in-out;
+            z-index: 3;
+        }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translate(0, 0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(100px, -100vh); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            min-height: 100vh;
+        }
+
+        /* Main card with glassmorphism */
+        .space-card {
+            background: rgba(26, 31, 58, 0.4);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow:
+                0 8px 32px 0 rgba(107, 45, 143, 0.37),
+                0 0 80px rgba(0, 255, 255, 0.1),
+                inset 0 0 100px rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            position: relative;
+            overflow: hidden;
+            animation: cardAppear 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(60px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Animated corner borders */
+        .space-card::before,
+        .space-card::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 2px solid var(--cyan-glow);
+            opacity: 0.4;
+            animation: cornerPulse 3s ease-in-out infinite;
+        }
+
+        .space-card::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 30px 0 0 0;
+        }
+
+        .space-card::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 30px 0;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes cornerPulse {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* Gradient text title */
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #00ffff 0%, #d946ef 50%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+            animation: titleFloat 4s ease-in-out infinite;
+            position: relative;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 40px;
+            color: #e8e8e8;
+            font-weight: 300;
+        }
+
+        .intro p {
+            margin-bottom: 8px;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .intro p:nth-child(1) { animation-delay: 0.1s; }
+        .intro p:nth-child(2) { animation-delay: 0.2s; }
+        .intro p:nth-child(3) { animation-delay: 0.3s; }
+        .intro p:nth-child(4) { animation-delay: 0.4s; }
+        .intro p:nth-child(5) { animation-delay: 0.5s; }
+        .intro p:nth-child(6) { animation-delay: 0.6s; }
+        .intro p:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animated divider */
+        .space-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan-glow) 20%, var(--nebula-pink) 50%, var(--cyan-glow) 80%, transparent);
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .space-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .space-divider::after {
+            content: '✦';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--cyan-glow);
+            font-size: 20px;
+            background: var(--space-blue);
+            padding: 0 15px;
+            text-shadow: 0 0 10px var(--cyan-glow);
+            animation: spinGlow 4s linear infinite;
+        }
+
+        @keyframes spinGlow {
+            0% { transform: translate(-50%, -50%) rotate(0deg); text-shadow: 0 0 10px var(--cyan-glow); }
+            50% { text-shadow: 0 0 20px var(--nebula-pink); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); text-shadow: 0 0 10px var(--cyan-glow); }
+        }
+
+        /* Enhanced Buttons */
+        .button-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .space-btn {
+            padding: 16px 40px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(217, 70, 239, 0.15));
+            border: 2px solid var(--cyan-glow);
+            border-radius: 50px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.3),
+                inset 0 0 20px rgba(0, 255, 255, 0.05);
+            display: inline-block;
+        }
+
+        .space-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.4), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .space-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .space-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 10px 40px rgba(0, 255, 255, 0.5),
+                0 0 60px rgba(0, 255, 255, 0.3);
+            border-color: var(--cyan-glow);
+        }
+
+        .space-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .space-btn.secondary {
+            border-color: var(--nebula-pink);
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.15), rgba(107, 45, 143, 0.15));
+            box-shadow: 
+                0 0 20px rgba(217, 70, 239, 0.3),
+                inset 0 0 20px rgba(217, 70, 239, 0.05);
+        }
+
+        .space-btn.secondary::before {
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.4), transparent);
+        }
+
+        .space-btn.secondary:hover {
+            box-shadow: 
+                0 10px 40px rgba(217, 70, 239, 0.5),
+                0 0 60px rgba(217, 70, 239, 0.3);
+        }
+
+        /* Section styling */
+        .section {
+            margin: 50px 0;
+            animation: fadeInUp 1s ease-out backwards;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--cyan-glow);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding-left: 35px;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            background: var(--cyan-glow);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: starPulse 2s infinite;
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        @keyframes starPulse {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1) rotate(0deg); }
+            50% { opacity: 0.6; transform: translateY(-50%) scale(1.3) rotate(180deg); }
+        }
+
+        /* Enhanced Feature cards */
+        .feature-card {
+            background: rgba(0, 255, 255, 0.03);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
+            transition: left 0.8s;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--cyan-glow), var(--nebula-pink));
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s;
+        }
+
+        .feature-card:hover {
+            background: rgba(0, 255, 255, 0.08);
+            border-color: var(--cyan-glow);
+            transform: translateX(15px) translateY(-5px);
+            box-shadow: 
+                -10px 10px 30px rgba(0, 255, 255, 0.3),
+                0 0 50px rgba(0, 255, 255, 0.2);
+        }
+
+        .feature-card:hover::after {
+            opacity: 0.1;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--nebula-pink);
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px rgba(217, 70, 239, 0.6);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover h3 {
+            color: var(--cyan-glow);
+            text-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .feature-card p {
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+        }
+
+        .feature-card a {
+            color: var(--cyan-glow);
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .feature-card a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--nebula-pink);
+            transition: width 0.3s;
+        }
+
+        .feature-card a:hover::after {
+            width: 100%;
+        }
+
+        .feature-card a:hover {
+            color: var(--nebula-pink);
+            text-shadow: 0 0 15px var(--nebula-pink);
+            transform: translateX(8px);
+        }
+
+        /* Server list */
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .list {
+            list-style: none;
+            color: #e8e8e8;
+        }
+
+        .list li {
+            padding: 14px 0;
+            padding-left: 35px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 2px solid transparent;
+            font-size: 1.05rem;
+        }
+
+        .list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--orange-glow);
+            font-size: 12px;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 10px var(--orange-glow);
+        }
+
+        .list li:hover {
+            padding-left: 45px;
+            color: var(--cyan-glow);
+            border-left-color: var(--cyan-glow);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .list li:hover::before {
+            color: var(--cyan-glow);
+            transform: translateX(5px);
+            text-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        /* Enhanced Social icons */
+        .social-links {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin: 60px 0 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.08);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--cyan-glow), transparent);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s ease;
+        }
+
+        .social-icon:hover::before {
+            opacity: 0.3;
+            transform: scale(1.2);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-12px) scale(1.1);
+            border-color: var(--cyan-glow);
+            box-shadow: 
+                0 15px 40px rgba(0, 255, 255, 0.5),
+                0 0 60px rgba(0, 255, 255, 0.4);
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        /* Social icon designs */
+        .icon-twitter {
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .icon-twitter::before {
+            content: '𝕏';
+            font-size: 22px;
+            color: var(--cyan-glow);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            filter: drop-shadow(0 0 5px var(--cyan-glow));
+        }
+
+        .icon-tiktok {
+            position: relative;
+            width: 20px;
+            height: 24px;
+        }
+
+        .icon-tiktok::before,
+        .icon-tiktok::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 3px solid;
+            border-radius: 50%;
+        }
+
+        .icon-tiktok::before {
+            border-color: var(--cyan-glow);
+            top: 0;
+            right: 0;
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        .icon-tiktok::after {
+            border-color: var(--nebula-pink);
+            bottom: 0;
+            left: 0;
+            box-shadow: 0 0 10px var(--nebula-pink);
+        }
+
+        .icon-instagram {
+            position: relative;
+            width: 26px;
+            height: 26px;
+            border: 2px solid var(--nebula-pink);
+            border-radius: 8px;
+            box-shadow: 0 0 10px var(--nebula-pink);
+        }
+
+        .icon-instagram::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--nebula-pink);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .icon-instagram::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--nebula-pink);
+            border-radius: 50%;
+            top: 5px;
+            right: 5px;
+            box-shadow: 0 0 5px var(--nebula-pink);
+        }
+
+        .icon-email {
+            position: relative;
+            width: 26px;
+            height: 20px;
+            border: 2px solid var(--cyan-glow);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        .icon-email::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 13px solid transparent;
+            border-right: 13px solid transparent;
+            border-top: 11px solid var(--cyan-glow);
+            top: -2px;
+            left: 0;
+            filter: drop-shadow(0 0 5px var(--cyan-glow));
+        }
+
+        .icon-discord {
+            position: relative;
+            width: 28px;
+            height: 22px;
+            background: var(--nebula-pink);
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--nebula-pink);
+        }
+
+        .icon-discord::before,
+        .icon-discord::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--space-dark);
+            border-radius: 50%;
+            top: 7px;
+        }
+
+        .icon-discord::before {
+            left: 6px;
+        }
+
+        .icon-discord::after {
+            right: 6px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .space-card {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .space-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .servers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .social-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Interactive Constellation Background -->
+    <canvas id="constellation-canvas"></canvas>
+
+    <!-- Nebula clouds -->
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    <div class="nebula nebula-3"></div>
+
+    <!-- Floating particles -->
+    <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 30%; animation-delay: 5s;"></div>
+    <div class="particle" style="left: 50%; animation-delay: 10s;"></div>
+    <div class="particle" style="left: 70%; animation-delay: 15s;"></div>
+    <div class="particle" style="left: 90%; animation-delay: 3s;"></div>
+
+    <div class="container">
+        <div class="space-card">
+            <h1>TUMELO GAMING</h1>
+
+            <div class="intro">
+                <p>Hi there I'm Tumelo</p>
+                <p>A gamer that loves playing minecraft, gta5, fortnite, codm and genshin impact and streams on twitch</p>
+                <p>My pronouns are he/him.</p>
+                <p>Mc Mod developer</p>
+                <p>Mc Skript plugin developer</p>
+                <p>Discord Bot developer</p>
+                <p>Have a loving Girlfriend</p>
+            </div>
+
+            <div class="space-divider"></div>
+
+            <div class="button-group">
+                <a href="https://tiktok.com/@tumelogaming" class="space-btn" target="_blank" rel="noopener">
+                    <span>TikTok</span>
+                </a>
+                <a href="https://twitch.tv/Yaboistreem" class="space-btn secondary" target="_blank" rel="noopener">
+                    <span>Twitch</span>
+                </a>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">New Staff Positions</h2>
+                <div class="feature-card">
+                    <h3>Moderator - Wrens World</h3>
+                    <p>Youtuber Discord Community</p>
+                    <a href="https://www.youtube.com/@WrensWorldVT" target="_blank" rel="noopener">Visit YouTube Channel →</a>
+                </div>
+                <div class="feature-card">
+                    <h3>Developer - W3eklyMC</h3>
+                    <p>Minecraft Server Development</p>
+                    <a href="https://discord.gg/w3eklymc" target="_blank" rel="noopener">Join Discord Server →</a>
+                </div>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Online Occupation</h2>
+                <div class="feature-card">
+                    <h3>Freelancer on FuzzLabs</h3>
+                    <p>Offering development services and custom solutions</p>
+                    <a href="https://discord.gg/CpZHK5JTYR" target="_blank" rel="noopener">Join FuzzLabs Discord →</a>
+                </div>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">My Projects</h2>
+                <div class="feature-card">
+                    <h3>Password Generator</h3>
+                    <p>Need a secure password? Try my online password generator tool</p>
+                    <a href="https://ineedapassword.netlify.app/" target="_blank" rel="noopener">Generate Password →</a>
+                </div>
+            </div>
+
+            <div class="section reveal">
+                <h2 class="section-title">Minecraft Server Experience</h2>
+                <div class="servers-grid">
+                    <ul class="list">
+                        <li>SparkedMC - SrMod</li>
+                        <li>BakugoMC - Mod</li>
+                        <li>DarkstroMC - Mod</li>
+                        <li>PeachMC - Manager & Net Manager</li>
+                        <li>Minehub - Manager</li>
+                        <li>MineRush - SrAdmin</li>
+                    </ul>
+                    <ul class="list">
+                        <li>FrostifyMC - JrMod</li>
+                        <li>FrostMC - Manager</li>
+                        <li>FrostMC Relaunch - Executive</li>
+                        <li>DogsHaven - Builder+Mod</li>
+                        <li>FireSMP - Manager</li>
+                        <li>MineSwim - Admin</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="space-divider"></div>
+
+            <div class="social-links reveal">
+                <a href="https://twitter.com/TumeloGaming?t=1QH3wSticF2pCwpRAxXDWw&s=09" class="social-icon" target="_blank" rel="noopener" aria-label="Twitter">
+                    <div class="icon-twitter"></div>
+                </a>
+                <a href="https://www.tiktok.com/@tumelogaming?_t=ZM-8uIF448iRpV&_r=1" class="social-icon" target="_blank" rel="noopener" aria-label="TikTok">
+                    <div class="icon-tiktok"></div>
+                </a>
+                <a href="https://www.instagram.com/tumelogaming?igsh=MTUwbmhyYXZ0bmNwYQ==" class="social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+                    <div class="icon-instagram"></div>
+                </a>
+                <a href="mailto:kgafaneMC@gmail.com" class="social-icon" target="_blank" rel="noopener" aria-label="Email">
+                    <div class="icon-email"></div>
+                </a>
+                <a href="https://discordapp.com/users/944246408247136297" class="social-icon" target="_blank" rel="noopener" aria-label="Discord">
+                    <div class="icon-discord"></div>
+                </a>
+            </div>
+
+            <div class="footer">
+                <p>MADE WITH PASSION BY TUMELOGAMING</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Loader Script -->
+    <script src="/js/content-loader.js"></script>
+
+    <script>
+        // Interactive Constellation Canvas
+        const canvas = document.getElementById('constellation-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 150;
+        const mouse = { x: null, y: null, radius: 150 };
+        const connectionDistance = 120;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.3;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                // Mouse interaction
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius && mouse.x !== null) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= Math.cos(angle) * force * 2;
+                    this.y -= Math.sin(angle) * force * 2;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 255, ${this.opacity})`;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'rgba(0, 255, 255, 0.5)';
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        function init() {
+            particles.length = 0;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connect() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a + 1; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        const opacity = (1 - distance / connectionDistance) * 0.3;
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 255, 255, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Connect to mouse
+                if (mouse.x !== null) {
+                    const dx = particles[a].x - mouse.x;
+                    const dy = particles[a].y - mouse.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius) {
+                        const opacity = (1 - distance / mouse.radius) * 0.5;
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(217, 70, 239, ${opacity})`;
+                        ctx.lineWidth = 2;
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            connect();
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Mouse move event
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        // Mouse leave event
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Resize event
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+    </script>
+</body>
+</html>
