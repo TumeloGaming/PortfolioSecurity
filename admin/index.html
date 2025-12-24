@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>TumeloGaming - Admin Panel</title>
+  <!-- Netlify Identity Widget for Git Gateway authentication -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     :root {
       --primary: #00ffff;
@@ -24,7 +26,9 @@
   </style>
 </head>
 <body>
-  <!-- Decap CMS will mount its interface here -->
+  <!-- This is where Decap CMS renders its interface -->
+  <div id="nc-root"></div>
+  <!-- Load Decap CMS after the page loads -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
